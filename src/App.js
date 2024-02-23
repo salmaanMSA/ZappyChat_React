@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import Nav from './components/nav/Nav';
+import ChatBody from './components/ChatBody/ChatBody';
+import dummyData from './dummyData.json'
+import { addContacts, addConversations, showCurrentContact } from './actions';
 
 function App() {
+  const dispatch = useDispatch();
+  // Load Initial Datas
+  dispatch(addContacts(dummyData.contacts));
+  dispatch(addConversations(dummyData.conversations));
+  dispatch(showCurrentContact(dummyData.contacts[0]));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="__main">
+      <Nav />
+      <ChatBody />
     </div>
   );
 }
